@@ -8,12 +8,12 @@ class EmailController {
                 message: 'Requisição inválida' 
             })
         }
-        /*const minMs = 2000
+        const minMs = 2000
         if (!startedAt || Date.now() - Number(startedAt) < minMs) {
             return res.status(400).json({ 
                 message: 'Form enviado rápido demais' 
             })
-        }*/
+        }
         try {
             await sendEmail({name, phone, msg})
             res.status(200).json({ 
