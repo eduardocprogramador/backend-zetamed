@@ -9,10 +9,11 @@ const emailLimiter = rateLimit({
   standardHeaders: true, 
   legacyHeaders: false,  
   message: {
-    message: 'Você atingiu o limite de 2 envios por minuto. Tente novamente em breve.'
+    message: 'Você atingiu o limite de 3 envios por minuto. Tente novamente em breve.'
   }
 })
 
-router.post('/send', emailLimiter, EmailController.send)
+router.post('/send_referral_guide', emailLimiter, EmailController.sendReferralGuide)
+router.post('/send_request_quote', emailLimiter, EmailController.sendRequestQuote)
 
 module.exports = router
