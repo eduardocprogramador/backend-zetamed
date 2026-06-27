@@ -14,28 +14,32 @@ class EmailController {
                 message: 'Form enviado rápido demais'
             })
         }
+        const examesHtml = form.selectedExams
+            .map(exam => `<li>${exam}</li>`)
+            .join('')
         const mailOptions = {
             from: `Zetamed Site <${process.env.EMAIL_USER}>`,
             to: process.env.EMAIL_USER,
             subject: "Guia de Encaminhamento",
             html: `
-            <strong>CPF ou CNPJ:</strong> ${form.cpfOrCnpj}<br>
+            <strong>CNPJ:</strong> ${form.cnpj}<br>
             <strong>Razão Social:</strong> ${form.name}<br>
             <strong>Data do Exame:</strong> ${form.examDate}<br>
             <strong>Turno:</strong> ${form.shift}<br>
             <hr>
             <strong>Nome do Funcionário:</strong> ${form.employeeName}<br>
-            <strong>RG:</strong> ${form.rg}<br>
-            <strong>CPF:</strong> ${form.cpf}<br>
-            <strong>Sexo:</strong> ${form.gender}<br>
             <strong>Data de Nascimento:</strong> ${form.birthDate}<br>
             <strong>Data de Admissão:</strong> ${form.admissionDate}<br>
-            <strong>Matrícula do eSocial:</strong> ${form.eSocialRegistration}<br>
+            <strong>CPF:</strong> ${form.cpf}<br>
+            <strong>Sexo:</strong> ${form.gender}<br>
             <strong>Telefone:</strong> ${form.phone}<br>
+            <strong>Email:</strong> ${form.email}<br>
             <strong>Setor:</strong> ${form.sector}<br>
-            <strong>Função/Cargo:</strong> ${form.position}<br>
-            <strong>Categoria eSocial:</strong> ${form.eSocialCategory}<br>
-            <strong>Tipo de Exame:</strong> ${form.examType}
+            <strong>Função:</strong> ${form.position}<br>
+            <strong>Tipo de Exame:</strong> ${form.examType}<br>
+            <strong>Exames Complementares:</strong>
+            <ul>${examesHtml}</ul>
+            <strong>Observação:</strong> ${form.obs}
             `,
         }
         try {
@@ -75,7 +79,7 @@ class EmailController {
             <strong>Ramo da Empresa:</strong> ${form.branch}<br>
             <strong>Cidade e Estado:</strong> ${form.cityAndState}<br>
             <hr>
-            <strong>Solicitante</strong>
+            <strong>Solicitante</strong><br>
             <strong>Nome:</strong> ${form.name}<br>
             <strong>Email:</strong> ${form.email}<br>
             <strong>Cargo/Função:</strong> ${form.position}<br>
